@@ -21,7 +21,7 @@ module.exports = {
 
         loginPage
             .waitForElementVisible('@loginHeader', 5000)
-            .assert.urlEquals('https://github.com/login');
+            .assert.urlEquals(loginPage.url());
 
         client.end();
     }

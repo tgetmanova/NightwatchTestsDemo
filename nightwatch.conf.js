@@ -12,7 +12,7 @@ var FIREFOX_CONFIGURATION = {
 };
 
 var DEFAULT_CONFIGURATION = {
-    launch_url: 'http://github.com',
+    launch_url: 'https://github.com',
     selenium_port: 4444,
     selenium_host: 'localhost',
     desiredCapabilities: FIREFOX_CONFIGURATION
