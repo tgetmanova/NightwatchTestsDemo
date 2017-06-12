@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="0"
+            failures="0"
+            tests="2">
+
+  <testsuite name="test"
+    errors="0" failures="0" hostname="" id="" package="test" skipped="0"
+    tests="2" time="15.61" timestamp="Mon, 12 Jun 2017 13:54:20 GMT">
+  
+    <testcase name="Search nightwatch at Github test" classname="test" time="7.967" assertions="3">
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Open Github login page test" classname="test" time="7.639" assertions="2">
+
+    
+
+    
+    </testcase>
+  
+
+  
+
+  
+  </testsuite>
+</testsuites>

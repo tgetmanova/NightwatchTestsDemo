@@ -1,5 +1,5 @@
 module.exports = {
-        'Search nightwatch at Github test': (client) => {
+    'Search nightwatch at Github test': (client) => {
         const page = client.page.search();
 
         page.navigate()
@@ -9,5 +9,20 @@ module.exports = {
             .assert.elementPresent('@nightwatchRepositoryLink');
 
         client.end();
-        }
+    },
+
+    'Open Github login page test': (client) => {
+        const homePage = client.page.home();
+
+        homePage.navigate()
+            .click('@signInLink');
+
+        const loginPage = client.page.login();
+
+        loginPage
+            .waitForElementVisible('@loginHeader', 5000)
+            .assert.urlEquals('https://github.com/login');
+
+        client.end();
+    }
 }
