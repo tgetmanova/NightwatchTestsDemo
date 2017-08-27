@@ -3,6 +3,8 @@ module.exports = {
         return this.api.launch_url + "/login";
     },
     elements: {
-        loginHeader: '#login > form > div.auth-form-header.p-0 > h1'
+        userNameTextField : 'input[id="login_field"]',
+		passwordTextField : 'input[id="password"]',
+		submitButton : 'input[name="commit"]'
     }
 };

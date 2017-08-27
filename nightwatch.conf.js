@@ -1,12 +1,12 @@
 var SELENIUM_CONFIGURATION = {
     start_process: true,
-    server_path: '/home/tgetmanova/Documents/IdeaProjects/NightwatchTestsDemo/selenium-server-standalone-3.5.1.jar',
+    server_path: 'source/selenium-server-standalone-3.5.2.jar',
     host: '127.0.0.1',
     port: 4444,
-cli_args : {
-      "webdriver.chrome.driver" : "/home/tgetmanova/Documents/IdeaProjects/NightwatchTestsDemo/chromedriver",
-      "webdriver.gecko.driver" : "/home/tgetmanova/Documents/IdeaProjects/NightwatchTestsDemo/geckodriver",
-      "webdriver.edge.driver" : ""
+	cli_args : {
+      "webdriver.chrome.driver" : "source/chromedriver.exe",
+      "webdriver.gecko.driver" : "source/geckodriver.exe",
+      "webdriver.edge.driver" : "source/MicrosoftWebDriver.exe"
     }
 };
 

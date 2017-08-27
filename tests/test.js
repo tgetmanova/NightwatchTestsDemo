@@ -1,28 +1,15 @@
+var context = require('../context.js');
+var login = require('../steps/login_steps.js');
+var search = require('../steps/search_steps.js');
+
 module.exports = {
     'Search nightwatch at Github test': (client) => {
-        const page = client.page.search();
-
-        page.navigate()
-            .setValue('@searchField', ['nightwatch', client.Keys.ENTER])
-            .waitForElementVisible('@resultsHeader', 5000)
-            .assert.containsText('@resultsHeader', 'results')
-            .assert.elementPresent('@nightwatchRepositoryLink');
-
+		search.searchFor(client, 'nightwatch', '@nightwatchRepositoryLink')
         client.end();
-    },
+    }, 
 
-    'Open Github login page test': (client) => {
-        const homePage = client.page.home();
-
-        homePage.navigate()
-            .click('@signInLink');
-
-        const loginPage = client.page.login();
-
-        loginPage
-            .waitForElementVisible('@loginHeader', 5000)
-            .assert.urlEquals(loginPage.url());
-
+    'Login page test': (client) => {
+		login.login(client);        
         client.end();
     }
 }
