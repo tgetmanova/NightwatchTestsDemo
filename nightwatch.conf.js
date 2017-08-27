@@ -1,4 +1,4 @@
-var SELENIUM_CONFIGURATION = {
+var SELENIUM_CONFIGURATION_WINDOWS = {
     start_process: true,
     server_path: 'source/selenium-server-standalone-3.5.2.jar',
     host: '127.0.0.1',
@@ -9,6 +9,18 @@ var SELENIUM_CONFIGURATION = {
       "webdriver.edge.driver" : "source/MicrosoftWebDriver.exe"
     }
 };
+
+var SELENIUM_CONFIGURATION_LINUX = {
+    start_process: true,
+    server_path: 'source/selenium-server-standalone-3.5.2.jar',
+    host: '127.0.0.1',
+    port: 4444,
+	cli_args : {
+      "webdriver.chrome.driver" : "source/chromedriver",
+      "webdriver.gecko.driver" : "source/geckodriver"
+    }
+};
+
 
 var FIREFOX_CONFIGURATION = {
     browserName: 'firefox',
@@ -26,7 +38,7 @@ var DEFAULT_CONFIGURATION = {
     launch_url: 'https://github.com',
     selenium_port: 4444,
     selenium_host: 'localhost',
-    desiredCapabilities: CHROME_CONFIGURATION
+    desiredCapabilities: FIREFOX_CONFIGURATION
 };
 
 var ENVIRONMENTS = {
@@ -36,6 +48,6 @@ var ENVIRONMENTS = {
 module.exports = {
     src_folders: ['tests'],
     page_objects_path: ['pages'],
-    selenium: SELENIUM_CONFIGURATION,
+    selenium: SELENIUM_CONFIGURATION_LINUX,
     test_settings: ENVIRONMENTS
 };
