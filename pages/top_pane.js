@@ -9,6 +9,7 @@ module.exports = {
 		paneDiv : {
 			selector: 'a[href="https://github.com/"]',
 			locateStrategy: 'css selector'
-		}
+		},
+		settingsLink: 'a[href="/settings/profile"]'
 	}
 };
