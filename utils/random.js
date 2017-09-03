@@ -10,5 +10,9 @@ module.exports = {
             randomString += this.getRandomElement.apply(this, alphabet);
         }
         return randomString;
+    },
+
+    getValidEmailAddress: function () {
+        return this.getRandomAlphanumeric(30) + "@" + this.getRandomAlphanumeric(20) + ".test";
     }
 }

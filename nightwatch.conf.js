@@ -21,7 +21,6 @@ var SELENIUM_CONFIGURATION_LINUX = {
     }
 };
 
-
 var FIREFOX_CONFIGURATION = {
     browserName: 'firefox',
     javascriptEnabled: true,
@@ -38,7 +37,7 @@ var DEFAULT_CONFIGURATION = {
     launch_url: 'https://github.com',
     selenium_port: 4444,
     selenium_host: 'localhost',
-    desiredCapabilities: FIREFOX_CONFIGURATION
+    desiredCapabilities: CHROME_CONFIGURATION
 };
 
 var ENVIRONMENTS = {
@@ -48,6 +47,6 @@ var ENVIRONMENTS = {
 module.exports = {
     src_folders: ['tests'],
     page_objects_path: ['pages'],
-    selenium: SELENIUM_CONFIGURATION_LINUX,
+    selenium: SELENIUM_CONFIGURATION_WINDOWS,
     test_settings: ENVIRONMENTS
 };
