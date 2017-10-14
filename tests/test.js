@@ -15,12 +15,19 @@ module.exports = {
         client.end();
     },
 
-    'Email page test': (client) => {
+    'Add new email notification test': (client) => {
         login.login(client);
         profile.openProfileSettings(client).clickEmailsTabLink(client);
         var emailAddress = random.getValidEmailAddress();
         email.submitEmailAddress(client, emailAddress);
         email.verifyEmailAddedNotificationIsDisplayed(client, emailAddress);
+        // email.verifyEmailAddressIsInTheList(client, emailAddress);
         client.end();
     }
+
+    // 'Remove email notification test': (client) => {
+    //     login.login(client);
+    //     profile.openProfileSettings(client).clickEmailsTabLink(client);
+    //
+    // }
 }

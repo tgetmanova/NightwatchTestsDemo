@@ -1,5 +1,5 @@
 var context = require('../context.js');
-var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+var XMLHttpRequest = require("../modules/xmlhttprequest").XMLHttpRequest;
 
 module.exports = {
     getEmails: function () {
