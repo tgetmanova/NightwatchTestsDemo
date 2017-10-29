@@ -21,7 +21,7 @@ module.exports = {
         var emailAddress = random.getValidEmailAddress();
         email.submitEmailAddress(client, emailAddress);
         email.verifyEmailAddedNotificationIsDisplayed(client, emailAddress);
-        // email.verifyEmailAddressIsInTheList(client, emailAddress);
+        email.verifyEmailAddressIsInTheList(client, emailAddress);
         client.end();
     }
 

@@ -1,5 +1,5 @@
-var random = require('../utils/random.js')
-var githubService = require('../utils/github_service');
+let random = require('../utils/random.js')
+let githubService = require('../utils/github_service');
 const assert = require('assert');
 
 module.exports = {
@@ -27,10 +27,12 @@ module.exports = {
     },
 
     verifyEmailAddressIsInTheList: function (client, emailAddress) {
-        let emails = githubService.getEmails().map(i => i.email);
-        console.log(emails.join(';'));
-        console.log('*******' + emailAddress)
-        assert.equal(true, emails.indexOf(emailAddress) !== -1,
-            "Failed to retrieve newly created email address from Github service");
+        client.page.custom_command().queuedCommand(function () {
+            let emails = githubService.getEmails().map(i => i.email);
+            console.log("Emails list: " + emails.join(';'));
+            console.log("Target email Address: " + emailAddress);
+            assert.equal(true, emails.indexOf(emailAddress) !== -1,
+                "Failed to retrieve newly created email address from Github service");
+        });
     }
 }
