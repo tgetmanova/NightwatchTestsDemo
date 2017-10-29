@@ -21,6 +21,17 @@ var SELENIUM_CONFIGURATION_LINUX = {
     }
 };
 
+var SELENIUM_CONFIGURATION_MACOS = {
+    start_process: true,
+    server_path: 'source/selenium-server-standalone-3.5.2.jar',
+    host: '127.0.0.1',
+    port: 4444,
+    cli_args : {
+        "webdriver.chrome.driver" : "source/macos/chromedriver",
+        "webdriver.gecko.driver" : "source/macos/geckodriver"
+    }
+};
+
 var FIREFOX_CONFIGURATION = {
     browserName: 'firefox',
     javascriptEnabled: true,
@@ -47,6 +58,6 @@ var ENVIRONMENTS = {
 module.exports = {
     src_folders: ['tests'],
     page_objects_path: ['pages'],
-    selenium: SELENIUM_CONFIGURATION_WINDOWS,
+    selenium: SELENIUM_CONFIGURATION_MACOS,
     test_settings: ENVIRONMENTS
 };
