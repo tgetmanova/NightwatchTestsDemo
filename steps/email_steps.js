@@ -34,5 +34,36 @@ module.exports = {
             assert.equal(true, emails.indexOf(emailAddress) !== -1,
                 "Failed to retrieve newly created email address from Github service");
         });
-    }
+    },
+
+    getEmailHardcoded: function (client) {
+        console.log("**********  Inside getEmailPosition**** ");
+        return client
+            .useXpath()
+            .waitForElementVisible('//*[@id="settings-emails"]/li[5]/span[1]', 3000)
+            .getText("//*[@id=\"settings-emails\"]/li[5]/span[1]", function (result) {
+                console.log("********** Inside GetValue Callback, result:   " + result.value);
+                return result.value;
+            });
+    },
+
+    getPositionByEmailAddress: function (client, emailAddress) {
+        client
+            .useXpath()
+            .waitForElementVisible("//*[@id=\"settings-emails\"]/li[1]/span[1]", 3000)
+         //   .getAttribute("//span[contains(text(), 'ea137zOc6lInJ2rsCTL5dgjZ65zidS@jCk1Me4NqUAXSPy5goIE.test')]");
+
+        client.elements("xpath", "//*[@id=\"settings-emails\"]/li", function (result) {
+            let elements = result.value;
+            for (let i in elements){
+                console.log("*********" + i);
+                client
+                    .useXpath()
+                    .elementIdText("//*[@id=\"settings-emails\"]/li[" + i + "]/span[1]", function(text){
+                    console.log("*********" + text.value);
+                });
+            }
+        });
+    },
+
 }

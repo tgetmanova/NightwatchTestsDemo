@@ -41,7 +41,10 @@ var FIREFOX_CONFIGURATION = {
 var CHROME_CONFIGURATION = {
     browserName: 'chrome',
     javascriptEnabled: true,
-    acceptSslCerts: true
+    acceptSslCerts: true,
+    chromeOptions : {
+        args : ["start-fullscreen"]
+    }
 };
 
 var DEFAULT_CONFIGURATION = {
@@ -58,6 +61,6 @@ var ENVIRONMENTS = {
 module.exports = {
     src_folders: ['tests'],
     page_objects_path: ['pages'],
-    selenium: SELENIUM_CONFIGURATION_MACOS,
+    selenium: SELENIUM_CONFIGURATION_WINDOWS,
     test_settings: ENVIRONMENTS
 };
