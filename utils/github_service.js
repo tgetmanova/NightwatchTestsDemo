@@ -18,5 +18,19 @@ module.exports = {
         }
 
         return emailAddresses;
+    },
+
+    deleteEmail: function (emailToDelete) {
+        let request = new XMLHttpRequest();
+        request.open("DELETE", "https://api.github.com/user/emails", false, context.userLogin, context.userPassword);
+        request.setRequestHeader("Content-Type", "application/json");
+        request.setRequestHeader("Accept", "application/json");
+
+        request.send(`\"${emailToDelete}\"`);
+
+        console.log("Status Code: " + request.status);
+        if (request.status === 204) {
+            console.log(`Deleted: ${emailToDelete}`);
+        }
     }
 }

@@ -36,6 +36,12 @@ module.exports = {
         });
     },
 
+    cleanupEmail: function(client, emailToDelete) {
+        client.page.custom_command().queuedCommand(function () {
+            githubService.deleteEmail(emailToDelete);
+        });
+    },
+
     getEmailHardcoded: function (client) {
         console.log("**********  Inside getEmailPosition**** ");
         return client
