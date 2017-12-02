@@ -26,7 +26,7 @@ module.exports = {
         client.assert.containsText('#js-flash-container', expectedNotificationMessage);
     },
 
-    verifyEmailAddressIsInTheList: function (client, emailAddress) {
+    verifyEmailAddressIsSaved: function (client, emailAddress) {
         client.page.custom_command().queuedCommand(function () {
             let emails = githubService.getEmails().map(i => i.email);
             console.log("Emails list: " + emails.join(';'));
@@ -36,40 +36,25 @@ module.exports = {
         });
     },
 
-    cleanupEmail: function(client, emailToDelete) {
+    cleanupEmail: function (client, emailToDelete) {
         client.page.custom_command().queuedCommand(function () {
             githubService.deleteEmail(emailToDelete);
         });
     },
 
-    getEmailHardcoded: function (client) {
-        console.log("**********  Inside getEmailPosition**** ");
+    deleteEmailAddress: function (client, emailToDelete) {
         return client
             .useXpath()
-            .waitForElementVisible('//*[@id="settings-emails"]/li[5]/span[1]', 3000)
-            .getText("//*[@id=\"settings-emails\"]/li[5]/span[1]", function (result) {
-                console.log("********** Inside GetValue Callback, result:   " + result.value);
-                return result.value;
+            .waitForElementVisible('//*[@id="settings-emails"]/li', 3000)
+            .elements('xpath', '//*[@id="settings-emails"]/li', function (result) {
+                for (i = 1; i <= result.value.length; i++) {
+                    client.getText('css selector', `#settings-emails > li:nth-child(${i})`, function (result1) {
+                        if (result1.value.includes(emailToDelete)) {
+                            client.element('css selector',
+                                `#settings-emails > li:nth-child(${i}) button[class*="btn-link settings-remove-email "]`);
+                        }
+                    })
+                }
             });
-    },
-
-    getPositionByEmailAddress: function (client, emailAddress) {
-        client
-            .useXpath()
-            .waitForElementVisible("//*[@id=\"settings-emails\"]/li[1]/span[1]", 3000)
-         //   .getAttribute("//span[contains(text(), 'ea137zOc6lInJ2rsCTL5dgjZ65zidS@jCk1Me4NqUAXSPy5goIE.test')]");
-
-        client.elements("xpath", "//*[@id=\"settings-emails\"]/li", function (result) {
-            let elements = result.value;
-            for (let i in elements){
-                console.log("*********" + i);
-                client
-                    .useXpath()
-                    .elementIdText("//*[@id=\"settings-emails\"]/li[" + i + "]/span[1]", function(text){
-                    console.log("*********" + text.value);
-                });
-            }
-        });
-    },
-
+    }
 }

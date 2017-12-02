@@ -21,15 +21,19 @@ module.exports = {
         var emailAddress = random.getValidEmailAddress();
         email.submitEmailAddress(client, emailAddress);
         email.verifyEmailAddedNotificationIsDisplayed(client, emailAddress);
-        email.verifyEmailAddressIsInTheList(client, emailAddress);
+        email.verifyEmailAddressIsSaved(client, emailAddress);
 
         email.cleanupEmail(client, emailAddress);
         client.end();
-    }
+    },
 
     // 'Remove email notification test': (client) => {
     //     login.login(client);
     //     profile.openProfileSettings(client).clickEmailsTabLink(client);
+    //     var emailAddress = random.getValidEmailAddress();
+    //     email.submitEmailAddress(client, emailAddress);
     //
+    //     email.deleteEmailAddress(client, emailAddress);
+    //     client.end();
     // }
 }
