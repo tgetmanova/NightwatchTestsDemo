@@ -1,5 +1,6 @@
 let random = require('../utils/random.js')
 let githubService = require('../utils/github_service');
+let commonUtils = require('../utils/common');
 const assert = require('assert');
 
 module.exports = {
@@ -36,6 +37,16 @@ module.exports = {
         });
     },
 
+    verifyEmailAddressIsRemoved: function (client, emailAddress) {
+        client.page.custom_command().queuedCommand(function () {
+            let emails = githubService.getEmails().map(i => i.email);
+            console.log("Emails list: " + emails.join(';'));
+            console.log("Target email Address: " + emailAddress);
+            assert.equal(true, emails.indexOf(emailAddress) === -1,
+                "Removed email address is still returned from Github service");
+        });
+    },
+
     cleanupEmail: function (client, emailToDelete) {
         client.page.custom_command().queuedCommand(function () {
             githubService.deleteEmail(emailToDelete);
@@ -43,18 +54,29 @@ module.exports = {
     },
 
     deleteEmailAddress: function (client, emailToDelete) {
+        let emailPage = client.page.emails();
+
+        emailPage.waitForElementVisible('@emailsList', 3000);
+
         return client
             .useXpath()
-            .waitForElementVisible('//*[@id="settings-emails"]/li', 3000)
-            .elements('xpath', '//*[@id="settings-emails"]/li', function (result) {
+            .elements('xpath', emailPage.elements.emailsList['selector'], function (result) {
+                let emailsIndexes = [];
                 for (i = 1; i <= result.value.length; i++) {
-                    client.getText('css selector', `#settings-emails > li:nth-child(${i})`, function (result1) {
-                        if (result1.value.includes(emailToDelete)) {
-                            client.element('css selector',
-                                `#settings-emails > li:nth-child(${i}) button[class*="btn-link settings-remove-email "]`);
-                        }
-                    })
+                    emailsIndexes.push(i);
                 }
+                emailsIndexes.forEach(function (currentEmailIndex) {
+                    client.getText('css selector', commonUtils.formatStringTemplate(
+                        emailPage.props.emailSpanItemTemplate.toString(), {index: currentEmailIndex.toString()}),
+                        function (result) {
+                            if (result.value.includes(emailToDelete)) {
+                                client.click('css selector', commonUtils.formatStringTemplate(
+                                    emailPage.props.emailRemoveButtonTemplate.toString(),
+                                        {index: currentEmailIndex.toString()}))
+                                    .acceptAlert();
+                            }
+                        })
+                })
             });
     }
 }

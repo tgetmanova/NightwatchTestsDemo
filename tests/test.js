@@ -27,13 +27,14 @@ module.exports = {
         client.end();
     },
 
-    // 'Remove email notification test': (client) => {
-    //     login.login(client);
-    //     profile.openProfileSettings(client).clickEmailsTabLink(client);
-    //     var emailAddress = random.getValidEmailAddress();
-    //     email.submitEmailAddress(client, emailAddress);
-    //
-    //     email.deleteEmailAddress(client, emailAddress);
-    //     client.end();
-    // }
+    'Remove email notification test': (client) => {
+        login.login(client);
+        profile.openProfileSettings(client).clickEmailsTabLink(client);
+        var emailAddress = random.getValidEmailAddress();
+        email.submitEmailAddress(client, emailAddress);
+
+        email.deleteEmailAddress(client, emailAddress);
+        email.verifyEmailAddressIsRemoved(client, emailAddress);
+        client.end();
+    }
 }
