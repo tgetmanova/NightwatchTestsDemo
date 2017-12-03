@@ -2,6 +2,7 @@ var login = require('../steps/login_steps.js');
 var search = require('../steps/search_steps.js');
 var profile = require('../steps/profile_steps.js');
 var email = require('../steps/email_steps.js');
+var reply = require('../steps/reply_steps.js');
 var random = require('../utils/random.js');
 
 module.exports = {
@@ -37,5 +38,13 @@ module.exports = {
         email.deleteEmailAddress(client, emailAddress);
         email.verifyEmailAddressIsRemoved(client, emailAddress);
         client.end();
+    },
+
+    'Add saved reply test': client => {
+        login.login(client);
+        profile.openProfileSettings(client).clickSavedRepliesTabLink(client);
+        reply.addSavedReply(client);
+        client.end();
+
     }
 }

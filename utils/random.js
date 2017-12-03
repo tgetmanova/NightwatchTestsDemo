@@ -14,5 +14,9 @@ module.exports = {
 
     getValidEmailAddress: function () {
         return this.getRandomAlphanumeric(30) + "@" + this.getRandomAlphanumeric(20) + ".test";
+    },
+
+    getRandomBoolean: function(){
+        return Math.random() >= 0.5;
     }
 }

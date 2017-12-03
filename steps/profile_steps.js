@@ -11,5 +11,10 @@ module.exports = {
     clickEmailsTabLink: function (client) {
         var profileSettingsPage = client.page.profile_settings();
         profileSettingsPage.click('@emailsLink');
+    },
+
+    clickSavedRepliesTabLink: function (client) {
+        var profileSettingsPage = client.page.profile_settings();
+        profileSettingsPage.click('@repliesLink');
     }
 }
