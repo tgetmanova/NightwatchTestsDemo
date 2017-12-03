@@ -31,7 +31,7 @@ module.exports = {
         client.page.custom_command().queuedCommand(function () {
             let emails = githubService.getEmails().map(i => i.email);
             console.log("Emails list: " + emails.join(';'));
-            console.log("Target email Address: " + emailAddress);
+            console.log("Email Address expected to be added: " + emailAddress);
             assert.equal(true, emails.indexOf(emailAddress) !== -1,
                 "Failed to retrieve newly created email address from Github service");
         });
@@ -41,7 +41,7 @@ module.exports = {
         client.page.custom_command().queuedCommand(function () {
             let emails = githubService.getEmails().map(i => i.email);
             console.log("Emails list: " + emails.join(';'));
-            console.log("Target email Address: " + emailAddress);
+            console.log("Email Address expected to be removed: " + emailAddress);
             assert.equal(true, emails.indexOf(emailAddress) === -1,
                 "Removed email address is still returned from Github service");
         });
@@ -60,15 +60,15 @@ module.exports = {
 
         return client
             .useXpath()
-            .elements('xpath', emailPage.elements.emailsList['selector'], function (result) {
+            .elements('xpath', emailPage.elements.emailsList['selector'], (result) => {
                 let emailsIndexes = [];
                 for (i = 1; i <= result.value.length; i++) {
                     emailsIndexes.push(i);
                 }
-                emailsIndexes.forEach(function (currentEmailIndex) {
+                emailsIndexes.forEach((currentEmailIndex) => {
                     client.getText('css selector', commonUtils.formatStringTemplate(
                         emailPage.props.emailSpanItemTemplate.toString(), {index: currentEmailIndex.toString()}),
-                        function (result) {
+                        (result) => {
                             if (result.value.includes(emailToDelete)) {
                                 client.click('css selector', commonUtils.formatStringTemplate(
                                     emailPage.props.emailRemoveButtonTemplate.toString(),

@@ -32,6 +32,7 @@ module.exports = {
         profile.openProfileSettings(client).clickEmailsTabLink(client);
         var emailAddress = random.getValidEmailAddress();
         email.submitEmailAddress(client, emailAddress);
+        email.verifyEmailAddressIsSaved(client, emailAddress);
 
         email.deleteEmailAddress(client, emailAddress);
         email.verifyEmailAddressIsRemoved(client, emailAddress);
