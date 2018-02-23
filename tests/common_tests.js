@@ -10,7 +10,10 @@ module.exports = {
         login.login(client);
     },
 
-    after: function (client) {
-        client.end();
+    afterEach: function (client, done) {
+        client.end(function() {
+            console.log(`Test "${client.currentTest.name}" completed`);
+            done();
+        });
     }
 }

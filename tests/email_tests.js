@@ -14,22 +14,23 @@ module.exports = {
         email.verifyEmailAddressIsSaved(client, emailAddress);
 
         email.cleanupEmail(client, emailAddress);
-        client.end();
     },
 
-    'Remove email notification test': client => {
+    'Remove email test': client => {
+        let emailAddress = random.getValidEmailAddress();
         login.login(client);
         profile.openProfileSettings(client).clickEmailsTabLink(client);
-        let emailAddress = random.getValidEmailAddress();
-        email.submitEmailAddress(client, emailAddress);
-        email.verifyEmailAddressIsSaved(client, emailAddress);
+        email.createEmail(client, emailAddress);
 
         email.deleteEmailAddress(client, emailAddress);
+
         email.verifyEmailAddressIsRemoved(client, emailAddress);
-        client.end();
     },
 
-    after: function (client) {
-        client.end();
+    afterEach: function (client, done) {
+        client.end(function() {
+            console.log(`Test "${client.currentTest.name}" completed`);
+            done();
+        });
     }
 }

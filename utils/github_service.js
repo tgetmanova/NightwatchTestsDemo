@@ -31,6 +31,24 @@ module.exports = {
         console.log("Status Code: " + request.status);
         if (request.status === 204) {
             console.log(`Deleted: ${emailToDelete}`);
+        } else {
+            console.log(`Error: ${request.responseText}`);
+        }
+    },
+
+    createEmail: function (emailToCreate) {
+        let request = new XMLHttpRequest();
+        request.open("POST", "https://api.github.com/user/emails", false, context.userLogin, context.userPassword);
+        request.setRequestHeader("Content-Type", "application/json");
+        request.setRequestHeader("Accept", "application/json");
+
+        request.send(`\"${emailToCreate}\"`);
+
+        console.log("Status Code: " + request.status);
+        if (request.status === 201) {
+            console.log(`Created: ${emailToCreate}`);
+        } else {
+            console.log(`Error: ${request.responseText}`);
         }
     }
 }

@@ -47,6 +47,10 @@ module.exports = {
         });
     },
 
+    createEmail: function (client, emailToCreate) {
+        githubService.createEmail(emailToCreate);
+    },
+
     cleanupEmail: function (client, emailToDelete) {
         client.page.custom_command().queuedCommand(function () {
             githubService.deleteEmail(emailToDelete);
@@ -72,7 +76,7 @@ module.exports = {
                             if (result.value.includes(emailToDelete)) {
                                 client.click('css selector', commonUtils.formatStringTemplate(
                                     emailPage.props.emailRemoveButtonTemplate.toString(),
-                                        {index: currentEmailIndex.toString()}))
+                                    {index: currentEmailIndex.toString()}))
                                     .acceptAlert();
                             }
                         })
